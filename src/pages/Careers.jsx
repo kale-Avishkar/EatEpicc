@@ -55,6 +55,7 @@ export default function Careers() {
   }
 
   return (
+    <>
     <PageTransition>
       {/* ─── HERO ───────────────────────────────────────── */}
       <section style={{
@@ -181,10 +182,14 @@ export default function Careers() {
                         <h3 style={{ fontSize: '1.1rem', marginBottom: 8 }}>{role.title}</h3>
                         <p style={{ color: 'var(--text-muted)', fontSize: '0.87rem', lineHeight: 1.6, maxWidth: 640 }}>{role.desc}</p>
                       </div>
-                      <motion.div className="btn btn-outline btn-sm" style={{ whiteSpace: 'nowrap', flexShrink: 0 }}
-                        whileHover={{ background: role.color, color: 'white', borderColor: role.color }}>
+                      <motion.button
+                        className="btn btn-outline btn-sm"
+                        style={{ whiteSpace: 'nowrap', flexShrink: 0 }}
+                        whileHover={{ background: role.color, color: 'white', borderColor: role.color }}
+                        onClick={e => { e.stopPropagation(); setActiveRole(role) }}
+                      >
                         Apply <IconArrowRight />
-                      </motion.div>
+                      </motion.button>
                     </div>
                   </motion.div>
                   </motion.div>
@@ -200,7 +205,17 @@ export default function Careers() {
               <p style={{ color: 'var(--text-muted)', marginBottom: 20, fontSize: '0.9rem' }}>We're building the team from scratch. If you believe deeply in the mission and have skills that can move us forward, reach out directly.</p>
               <button 
                 className="btn btn-primary" 
-                onClick={() => setActiveRole({ title: 'Open Application', desc: 'Tell us how you can contribute to EatEpic from day one.', location: 'Anywhere', type: 'Flexible', badge: 'General', badgeClass: 'badge-blue', color: 'var(--primary)' })}
+                onClick={() => setActiveRole({ 
+                  title: 'Open Application', 
+                  tag: 'General',
+                  desc: 'Tell us how you can contribute to EatEpic from day one.', 
+                  location: 'Anywhere', 
+                  type: 'Flexible', 
+                  badge: 'General', 
+                  badgeClass: 'badge-blue', 
+                  color: 'var(--primary)',
+                  reqs: [],
+                })}
               >
                 Send an Open Application
               </button>
@@ -208,16 +223,27 @@ export default function Careers() {
           </FadeIn>
         </div>
       </section>
+        </PageTransition>
 
-      {/* ─── APPLY MODAL ────────────────────────────────── */}
+
+      {/* ─── APPLY MODAL — outside PageTransition to avoid transform context breaking position:fixed ─ */}
       <AnimatePresence>
         {activeRole && (
-          <motion.div className="modal-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            onClick={e => e.target === e.currentTarget && setActiveRole(null)}>
-            <motion.div className="modal-box" initial={{ scale: 0.95, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.95, y: 20 }}>
+          <motion.div
+            className="modal-overlay"
+            data-lenis-prevent
+            style={{ position: 'fixed', inset: 0, zIndex: 100, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', overflowY: 'auto', padding: '40px 20px', background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(8px)' }}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            onClick={e => e.target === e.currentTarget && setActiveRole(null)}
+          >
+            <motion.div
+              className="modal-box"
+              style={{ width: '100%', maxWidth: 540, margin: 'auto' }}
+              initial={{ scale: 0.95, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.95, y: 20 }}
+            >
               <button className="modal-close-btn" onClick={() => setActiveRole(null)}><IconX /></button>
               <div style={{ marginBottom: 24 }}>
-                <span className={`badge ${activeRole.badgeClass}`} style={{ marginBottom: 12, display: 'inline-flex' }}>{activeRole.tag}</span>
+                <span className={`badge ${activeRole.badgeClass}`} style={{ marginBottom: 12, display: 'inline-flex' }}>{activeRole.tag || activeRole.badge}</span>
                 <h2 style={{ fontSize: '1.4rem' }}>{activeRole.title}</h2>
                 <p style={{ color: 'var(--text-muted)', fontSize: '0.87rem', marginTop: 6 }}>{activeRole.location} · {activeRole.type}</p>
               </div>
@@ -256,6 +282,6 @@ export default function Careers() {
           </motion.div>
         )}
       </AnimatePresence>
-        </PageTransition>
+    </>
   )
 }

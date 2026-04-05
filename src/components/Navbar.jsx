@@ -46,7 +46,8 @@ export default function Navbar() {
           backdropFilter: scrolled ? 'blur(20px)' : 'none',
           WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
           borderBottom: scrolled ? '1px solid rgba(228,221,211,0.8)' : '1px solid transparent',
-          transition: 'all 0.35s ease',
+          transition: 'background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease',
+          willChange: 'background',
         }}
         initial={{ y: -80 }}
         animate={{ y: 0 }}

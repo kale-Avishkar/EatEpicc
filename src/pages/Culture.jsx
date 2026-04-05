@@ -26,7 +26,9 @@ const timeline = [
   { period: '2024', title: 'The Insight', desc: 'Co-founders Arjun and Divya, frustrated with food delivery, get a home-cooked tiffin from their neighbor. The food is extraordinary. The realization is immediate: this model can scale — with the right technology behind it.', accent: 'var(--primary)' },
   { period: 'Early 2025', title: 'Deep Research', desc: 'We conduct 40+ structured interviews with home cooks and 100+ with working professionals across Bangalore and Pune. The pain points are universal. The opportunity is massive. We decide to commit fully.', accent: '#6366f1' },
   { period: 'Q3 2025', title: 'Concept Validated', desc: 'Initial concept testing with 12 home cooks and 50 potential subscribers confirms strong demand and willingness to pay. We define the core product, establish the waitlist, and begin building.', accent: '#10b981' },
-  { period: 'Q4 2025', title: 'Building the MVP', desc: 'Engineering underway on the chef onboarding flow, subscription management, and real-time delivery tracking. The waitlist opens. The founding team expands to 5 people.', accent: '#8b5cf6' },
+  { period: 'Q4 2025 – Q1 2026', title: 'Building the MVP', desc: 'Engineering underway on the chef onboarding flow, subscription management, and real-time delivery tracking. The waitlist opens. The founding team expands to 5 people.', accent: '#8b5cf6' },
+  { period: 'Q2 2026', title: 'Beta Testing', desc: 'Closed beta with 50 home chefs and 200 subscribers across Pune and Bangalore. Rapid iteration based on real feedback. Logistics systems stress-tested at scale.', accent: '#f59e0b' },
+  { period: 'Q3 2026', title: 'Public Launch', desc: 'EatEpic goes live in Pune, Bangalore, and Hyderabad. Full subscription platform, live GPS tracking, weekly chef payouts, and instant customer support.', accent: '#10b981' },
   { period: '2026', title: 'Target Launch', desc: 'Planned launch in Mumbai, Maharashtra with 20 founding chef partners and 500 founding members. Phase 2 expansion to Pune, Hyderabad, and Bangalore follows within 6 months.', accent: 'var(--accent-dark)' },
 ]
 

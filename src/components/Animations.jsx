@@ -11,7 +11,7 @@ const fadeVariants = {
 
 export function FadeIn({ children, delay = 0, direction = 'up', className = '', style = {} }) {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px 0px' })
+  const inView = useInView(ref, { once: true, margin: '-60px 0px' })
   const v = fadeVariants[direction] || fadeVariants.up
   return (
     <motion.div
@@ -19,7 +19,7 @@ export function FadeIn({ children, delay = 0, direction = 'up', className = '', 
       variants={v}
       initial="hidden"
       animate={inView ? 'visible' : 'hidden'}
-      transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] }}
       className={className}
       style={style}
     >
@@ -30,7 +30,7 @@ export function FadeIn({ children, delay = 0, direction = 'up', className = '', 
 
 const staggerContainer = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
+  visible: { transition: { staggerChildren: 0.06, delayChildren: 0.03 } },
 }
 
 const staggerItem = {
