@@ -19,9 +19,24 @@ const contactTypes = [
 ]
 
 const socials = [
-  { Icon: IconInstagram, label: 'Instagram', handle: '@eatepic.in', href: '#' },
-  { Icon: IconTwitter, label: 'Twitter', handle: '@eatepic', href: '#' },
-  { Icon: IconLinkedIn, label: 'LinkedIn', handle: 'EatEpic Technologies', href: '#' },
+  {
+    Icon: IconInstagram, label: 'Instagram', handle: '@eatepic.in', href: '#',
+    /* Instagram gradient */
+    iconBg: 'linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)',
+    iconColor: '#fff',
+  },
+  {
+    Icon: IconTwitter, label: 'Twitter', handle: '@eatepic', href: '#',
+    /* X / Twitter black */
+    iconBg: '#000000',
+    iconColor: '#ffffff',
+  },
+  {
+    Icon: IconLinkedIn, label: 'LinkedIn', handle: 'EatEpic', href: '#',
+    /* LinkedIn blue */
+    iconBg: '#0A66C2',
+    iconColor: '#ffffff',
+  },
 ]
 
 const topics = [
@@ -136,10 +151,9 @@ export default function Contact() {
                   <label>Your Message *</label>
                   <textarea className="form-control" placeholder="Tell us what's on your mind. The more detail, the better we can help." required />
                 </div>
-                <motion.button type="submit" className="btn btn-primary btn-lg" style={{ width: '100%', justifyContent: 'center' }}
-                  whileHover={{ scale: 1.02, boxShadow: '0 16px 40px rgba(232,101,10,0.3)' }} whileTap={{ scale: 0.98 }}>
+                <button type="submit" className="btn btn-primary btn-lg" style={{ width: '100%', justifyContent: 'center' }}>
                   Send Message <IconSend />
-                </motion.button>
+                </button>
               </form>
             </FadeIn>
 
@@ -199,7 +213,7 @@ export default function Contact() {
               <div className="divider center" />
             </div>
           </FadeIn>
-          <StaggerContainer style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 22 }}>
+          <StaggerContainer style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 22 }}>
             {contactTypes.map(({ label, Icon, email, desc }) => (
               <StaggerItem key={label}>
                 <motion.div className="card" style={{ textAlign: 'center' }}
@@ -228,14 +242,34 @@ export default function Contact() {
             <h2 style={{ color: 'var(--white)', fontSize: '1.6rem', marginBottom: 10 }}>Follow the Build</h2>
             <p style={{ color: 'rgba(255,255,255,0.45)', marginBottom: 32, fontSize: '0.92rem' }}>Daily updates from the founding team on building in public.</p>
             <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
-              {socials.map(({ Icon, label, handle, href }) => (
+              {socials.map(({ Icon, label, handle, href, iconBg, iconColor }) => (
                 <motion.a key={label} href={href}
-                  style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 22px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 12, color: 'var(--white)' }}
-                  whileHover={{ y: -4, background: 'rgba(255,255,255,0.09)', borderColor: 'rgba(255,255,255,0.2)' }} whileTap={{ scale: 0.97 }}>
-                  <div style={{ width: 16, height: 16, color: 'rgba(255,255,255,0.6)' }}><Icon /></div>
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: 12,
+                    padding: '12px 20px',
+                    background: 'rgba(255,255,255,0.05)',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    borderRadius: 14, color: 'var(--white)',
+                    textDecoration: 'none',
+                  }}
+                  whileHover={{ y: -4, background: 'rgba(255,255,255,0.09)', borderColor: 'rgba(255,255,255,0.22)' }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  {/* Coloured brand icon box */}
+                  <div style={{
+                    width: 36, height: 36, borderRadius: 10,
+                    background: iconBg,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    flexShrink: 0,
+                    boxShadow: '0 3px 10px rgba(0,0,0,0.25)',
+                  }}>
+                    <div style={{ width: 18, height: 18, color: iconColor, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <Icon />
+                    </div>
+                  </div>
                   <div style={{ textAlign: 'left' }}>
-                    <div style={{ fontWeight: 700, fontSize: '0.85rem' }}>{label}</div>
-                    <div style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.4)' }}>{handle}</div>
+                    <div style={{ fontWeight: 700, fontSize: '0.88rem', lineHeight: 1.2 }}>{label}</div>
+                    <div style={{ fontSize: '0.74rem', color: 'rgba(255,255,255,0.45)', marginTop: 2 }}>{handle}</div>
                   </div>
                 </motion.a>
               ))}

@@ -18,17 +18,36 @@ import Admin from './pages/Admin'
 export default function App() {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 0.9,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      touchMultiplier: 1.5,
+      /*
+        Performance-tuned Lenis settings:
+        - duration 0.7 (was 0.9) — snappier, feels more responsive
+        - easing: expo-out curve gives fast initial response then smooth settle
+        - smoothWheel: true — smooth mouse wheel
+        - smoothTouch: false — native touch scroll is already smooth on modern
+          phones and feels more natural; lenis touch can add latency
+        - lerp: 0.1 — interpolation factor (lower = smoother but laggy,
+          higher = snappier; 0.1 is the sweet spot for 60fps feel)
+      */
+      duration: 0.7,
+      easing: (t) => 1 - Math.pow(1 - t, 4),   // expo-out: fast then settle
+      smoothWheel: true,
+      smoothTouch: false,                         // let browser handle touch
+      touchMultiplier: 1,
       infinite: false,
+      lerp: 0.1,
     })
+
+    /*
+      Use a single rAF loop — don't create nested requestAnimationFrame calls.
+      This keeps the loop on the same frame budget as the browser compositor.
+    */
     let rafId
-    function raf(time) {
+    const raf = (time) => {
       lenis.raf(time)
       rafId = requestAnimationFrame(raf)
     }
     rafId = requestAnimationFrame(raf)
+
     return () => {
       cancelAnimationFrame(rafId)
       lenis.destroy()
@@ -39,16 +58,16 @@ export default function App() {
     <HashRouter>
       <ToastProvider>
         <Navbar />
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="wait" initial={false}>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/"        element={<Home />} />
             <Route path="/culture" element={<Culture />} />
             <Route path="/careers" element={<Careers />} />
-            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog"    element={<Blog />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/privacy" element={<Legal type="privacy" />} />
-            <Route path="/terms" element={<Legal type="terms" />} />
-            <Route path="/admin" element={<Admin />} />
+            <Route path="/terms"   element={<Legal type="terms" />} />
+            <Route path="/admin"   element={<Admin />} />
           </Routes>
         </AnimatePresence>
         <Footer />

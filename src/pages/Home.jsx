@@ -216,8 +216,7 @@ export default function Home() {
             transition={{ delay: 0.55 }}
             style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}
           >
-            <motion.div whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}>
-              <a
+            <a
                 href="#waitlist"
                 className="btn btn-primary btn-lg"
                 onClick={e => {
@@ -227,15 +226,12 @@ export default function Home() {
               >
                 Join the Waitlist <IconArrowRight />
               </a>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}>
-              <button 
-                onClick={() => toast('Chef Partner onboarding begins next month. Please join the waitlist to get notified.')} 
+            <button
+                onClick={() => toast('Chef Partner onboarding begins next month. Please join the waitlist to get notified.')}
                 className="btn btn-outline btn-lg"
               >
                 Register as Chef Partner
               </button>
-            </motion.div>
           </motion.div>
 
           {/* Trust chips — honest, non-fake */}
@@ -618,9 +614,9 @@ function WaitlistSection({ toast }) {
       localStorage.setItem('eatepic_waitlist', JSON.stringify(updated))
       setCount(updated.length)
     }
-    
+
     await submitToGoogleSheet({ type: 'Waitlist', email })
-    
+
     setSubmitted(true)
     toast('You are in. Founding member perks confirmed. We will reach out before anyone else.')
     setTimeout(() => setSubmitted(false), 5000)
@@ -829,9 +825,9 @@ function NewsletterSection({ toast }) {
       localStorage.setItem('eatepic_newsletter', JSON.stringify(updated))
       setSubCount(updated.length)
     }
-    
+
     await submitToGoogleSheet({ type: 'Newsletter', email })
-    
+
     setDone(true)
     toast('Subscribed. You will hear from Avishkar every Monday with honest founder updates.')
     setTimeout(() => setDone(false), 5000)
@@ -856,8 +852,7 @@ function NewsletterSection({ toast }) {
           ) : (
             <form className="newsletter-form" onSubmit={handleSubmit}>
               <input name="nl_email" type="email" placeholder="your@email.com" required />
-              <motion.button type="submit" className="btn btn-white" style={{ flexShrink: 0 }}
-                whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>Subscribe</motion.button>
+              <button type="submit" className="btn btn-white" style={{ flexShrink: 0 }}>Subscribe</button>
             </form>
           )}
           <p style={{ fontSize: '0.75rem', marginTop: 14, color: 'rgba(255,255,255,0.35)' }}>
@@ -1180,7 +1175,7 @@ function AppDownloadSection() {
               >
                 {/* Apple icon */}
                 <svg width="22" height="22" viewBox="0 0 814 1000" fill="white">
-                  <path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76.5 0-103.7 40.8-165.9 40.8s-105.4-57.2-155.5-127.4C46 790.7 0 663 0 541.8c0-207.5 135.4-317.3 269-317.3 70.1 0 128.4 46.4 172.5 46.4 42.8 0 109.1-49 188.6-49 30.3 0 108.2 2.6 168.3 71.2zm-174.5-72.9c-34.6-40.4-82.1-67-136.3-67-4.5 0-10.3 1.9-14.8 1.9-4.5 0 0-45.1 0-45.1 0-9-2.6 0-2.6 0-17.3 0-37.7 2.6-58.3 13-24.3 12.4-43.3 39.5-43.3 76.5 0 37 19.7 59.5 38 77.8 16.8 16.8 51.2 42.8 51.2 42.8s-5.8 1.3-10.3 1.3c-55.5 0-117.7-56.6-117.7-56.6 0 6.5 13 95.8 76.5 152.4 53.3 47.5 100.1 56.6 100.1 56.6l-47.5 1.3c-10.3 0-19 7.7-19 18.1 0 1.9.6 3.9.6 5.8C618.3 479 700.3 344.3 700.3 344.3c9 3.2 13.6 3.2 13.6 3.2-.1-2.6-.1-50.7-100.3-79.5z"/>
+                  <path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76.5 0-103.7 40.8-165.9 40.8s-105.4-57.2-155.5-127.4C46 790.7 0 663 0 541.8c0-207.5 135.4-317.3 269-317.3 70.1 0 128.4 46.4 172.5 46.4 42.8 0 109.1-49 188.6-49 30.3 0 108.2 2.6 168.3 71.2zm-174.5-72.9c-34.6-40.4-82.1-67-136.3-67-4.5 0-10.3 1.9-14.8 1.9-4.5 0 0-45.1 0-45.1 0-9-2.6 0-2.6 0-17.3 0-37.7 2.6-58.3 13-24.3 12.4-43.3 39.5-43.3 76.5 0 37 19.7 59.5 38 77.8 16.8 16.8 51.2 42.8 51.2 42.8s-5.8 1.3-10.3 1.3c-55.5 0-117.7-56.6-117.7-56.6 0 6.5 13 95.8 76.5 152.4 53.3 47.5 100.1 56.6 100.1 56.6l-47.5 1.3c-10.3 0-19 7.7-19 18.1 0 1.9.6 3.9.6 5.8C618.3 479 700.3 344.3 700.3 344.3c9 3.2 13.6 3.2 13.6 3.2-.1-2.6-.1-50.7-100.3-79.5z" />
                 </svg>
                 <div style={{ textAlign: 'left' }}>
                   <div style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.04em' }}>Download on the</div>
